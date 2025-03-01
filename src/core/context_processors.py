@@ -1,6 +1,5 @@
 def global_context(request):
     return {
-        "business": {
-            "name": "Admin",
-        }
+        "version": "0.0.1",
+        "site_name": "Admin",
     }

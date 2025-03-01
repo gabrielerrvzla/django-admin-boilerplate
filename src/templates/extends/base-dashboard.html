@@ -1,0 +1,81 @@
+{% extends 'extends/base.html' %}
+{% load i18n static %}
+
+{% block body %}
+<div class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <div class="app-wrapper">
+        <nav class="app-header navbar navbar-expand bg-body">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                            <i class="bi bi-list"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+            <div class="sidebar-brand">
+                <a href="./index.html" class="brand-link">
+                    <img src="{% static 'images/business-logo.png' %}" alt="AdminLTE Logo"
+                        class="brand-image opacity-75 shadow" />
+                    <span class="brand-text fw-light">{{ site_name }}</span>
+                </a>
+            </div>
+
+            <div class="sidebar-wrapper">
+                <nav class="mt-2">
+                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu"
+                        data-accordion="false">
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="app-main">
+            <div class="app-content-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="mb-0">{{ title }}</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-end">
+                                {% for breadcrumb in breadcrumbs %}
+                                {% if breadcrumb.url %}
+                                <li class="breadcrumb-item">
+                                    <a href="{{breadcrumb.url}}">
+                                        {{breadcrumb.label}}
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li class="breadcrumb-item active">
+                                    {{breadcrumb.label}}
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-content">
+                <div class="container-fluid">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <div class="float-end d-none d-sm-inline">{{ version }}</div>
+            <a href="https://digitalmente.tech" class="text-decoration-none" target="_blank">Digitalmente</a>
+        </footer>
+
+    </div>
+
+</div>
+{% endblock %}

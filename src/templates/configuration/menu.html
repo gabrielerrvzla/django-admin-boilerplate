@@ -1,0 +1,22 @@
+{% extends 'extends/base-dashboard.html' %}
+
+{% block content %}
+<div class="row justify-content-between">
+    {% for item in menu %}
+    <div class="col-10 col-sm-6  my-3">
+        <div class="menu-col">
+            <h5>{{ item.label }}</h5>
+            <ul class="list-unstyled" style="padding: 0;">
+                {% for child in item.children %}
+                <li style="border-bottom: 1px solid #ddd; padding: 10px 0;">
+                    <a href="{{ child.url }}" class="text-decoration-none">
+                        {{ child.label }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

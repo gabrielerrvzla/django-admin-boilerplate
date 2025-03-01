@@ -6,8 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | {{ business.name }}</title>
+    <title>{{ title }} | {{ site_name }}</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="{% static 'libs/adminlte-4.0.0/css/adminlte.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     {% block head %}{% endblock %}
@@ -27,6 +31,8 @@
     {% endif %}
 
 
+    <script
+        src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"></script>
     <script src="{% static 'libs/bootstrap-5.3.3/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'libs/adminlte-4.0.0/js/adminlte.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>

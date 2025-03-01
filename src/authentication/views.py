@@ -1,10 +1,10 @@
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import FormView
+from django.views.generic import FormView, View
 
 from account.models import User
 from core.generic.services import TokenService
@@ -26,6 +26,13 @@ class LoginView(FormView):
 
         messages.error(self.request, _("Correo electrónico o contraseña incorrectos"))
         return self.form_invalid(form)
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        messages.success(request, _("Has cerrado sesión correctamente"))
+        return redirect("authentication:login")
 
 
 class PasswordResetView(FormView):

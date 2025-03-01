@@ -28,6 +28,7 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     "account",
     "authentication",
+    "configuration",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
