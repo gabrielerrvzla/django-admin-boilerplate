@@ -24,7 +24,9 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-LOCAL_APPS = []
+LOCAL_APPS = [
+    "account",
+]
 THIRD_PARTY_APPS = []
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
@@ -74,7 +76,8 @@ DATABASES = {
     }
 }
 
-# PASSWORD VALIDATION
+# AUTHENTICATION
+AUTH_USER_MODEL = "account.User"
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
