@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | {{ business.name }}</title>
+
+    <link rel="stylesheet" href="{% static 'libs/adminlte-4.0.0/css/adminlte.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    {% block body %}{% endblock %}
+
+    {% if messages %}
+    <div id="alert-container" class="position-fixed fixed-bottom w-100 p-0 d-none" style="z-index: 1050;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-0 rounded-0" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+    <script src="{% static 'libs/bootstrap-5.3.3/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'libs/adminlte-4.0.0/js/adminlte.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block scripts %}{% endblock %}
+    <script>
+        
+    </script>
+
+</body>
+
+</html>

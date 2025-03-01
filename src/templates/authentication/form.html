@@ -1,0 +1,14 @@
+{% extends 'extends/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="login-page bg-body-secondary">
+    <div class="login-box">
+        <div class="login-logo">
+            {{ business.name }}
+        </div>
+        
+        {% crispy form %}
+    </div>
+</div>
+{% endblock %}

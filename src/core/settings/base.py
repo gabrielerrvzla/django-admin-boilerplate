@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import environ
+from django.contrib.messages import constants as messages
 
 # ENV
 env = environ.Env()
@@ -26,8 +27,12 @@ DJANGO_APPS = [
 ]
 LOCAL_APPS = [
     "account",
+    "authentication",
 ]
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "crispy_forms",
+    "crispy_bootstrap5",
+]
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 # MIDDLEWARES
@@ -56,6 +61,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.global_context",
             ],
         },
     },
@@ -77,6 +83,8 @@ DATABASES = {
 }
 
 # AUTHENTICATION
+LOGIN_URL = "authentication:login"
+LOGOUT_REDIRECT_URL = "authentication:login"
 AUTH_USER_MODEL = "account.User"
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -116,3 +124,18 @@ CACHES = {
 CELERY_BROKER_URL = env("CELERY_BROKER_URL")
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_CACHE_BACKEND = "default"
+
+
+# CRISPY FORMS
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+# MESSAGES
+MESSAGE_TAGS = {
+    messages.DEBUG: "secondary",
+    messages.INFO: "info",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "danger",
+}
