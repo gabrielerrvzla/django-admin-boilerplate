@@ -1,0 +1,16 @@
+# Environments
+.env
+.env.local
+env/
+venv/
+
+# Python
+*.pyc
+.python-version
+
+
+### Django ###
+*.log
+*.pyc
+__pycache__/
+media
