@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="row justify-content-between">
-    {% for item in menu %}
+    {% for item in configuration_menu %}
     <div class="col-10 col-sm-6  my-3">
-        <div class="menu-col">
+        <div>
             <h5>{{ item.label }}</h5>
             <ul class="list-unstyled" style="padding: 0;">
                 {% for child in item.children %}

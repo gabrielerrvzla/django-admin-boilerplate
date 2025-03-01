@@ -44,7 +44,7 @@ class ConfigurationView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["menu"] = self._process_menu(self.menu)
+        context["configuration_menu"] = self._process_menu(self.menu)
         return context
 
     def _process_menu(self, menu):
