@@ -137,7 +137,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # MESSAGES
 MESSAGE_TAGS = {
     messages.DEBUG: "secondary",
-    messages.INFO: "info",
+    messages.INFO: "light",
     messages.SUCCESS: "success",
     messages.WARNING: "warning",
     messages.ERROR: "danger",

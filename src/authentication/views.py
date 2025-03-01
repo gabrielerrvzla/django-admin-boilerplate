@@ -24,7 +24,7 @@ class LoginView(FormView):
             messages.info(self.request, _(f"Bienvenido(a) {user.full_name}"))
             return redirect("home")
 
-        messages.error(self.request, _("Correo electrónico o contraseña incorrectos"))
+        messages.info(self.request, _("Correo electrónico o contraseña incorrectos"))
         return self.form_invalid(form)
 
 
