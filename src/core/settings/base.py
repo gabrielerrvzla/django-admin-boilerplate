@@ -28,7 +28,7 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     "account",
     "authentication",
-    "configuration",
+    "base",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -62,7 +62,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "core.context_processors.global_context",
+                "base.context_processors.settings_context",
+                "base.context_processors.sidebar_context",
             ],
         },
     },
@@ -84,8 +85,9 @@ DATABASES = {
 }
 
 # AUTHENTICATION
-LOGIN_URL = "authentication:login"
-LOGOUT_REDIRECT_URL = "authentication:login"
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "login"
 AUTH_USER_MODEL = "account.User"
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

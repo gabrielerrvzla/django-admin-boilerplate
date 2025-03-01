@@ -21,8 +21,8 @@ class LoginView(FormView):
         user = authenticate(self.request, **form.cleaned_data)
         if user:
             login(self.request, user)
-            messages.success(self.request, _(f"Bienvenido(a) {user.full_name}"))
-            return redirect("admin:index")
+            messages.info(self.request, _(f"Bienvenido(a) {user.full_name}"))
+            return redirect("home")
 
         messages.error(self.request, _("Correo electrónico o contraseña incorrectos"))
         return self.form_invalid(form)
@@ -31,8 +31,8 @@ class LoginView(FormView):
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        messages.success(request, _("Has cerrado sesión correctamente"))
-        return redirect("authentication:login")
+        messages.info(request, _("Has cerrado sesión correctamente"))
+        return redirect("login")
 
 
 class PasswordResetView(FormView):
@@ -61,7 +61,7 @@ class PasswordResetView(FormView):
         )
 
         messages.info(self.request, _("Se ha enviado un mensaje con las instrucciones para restablecer tu contraseña"))
-        return redirect("authentication:login")
+        return redirect("login")
 
 
 class PasswordResetConfirmView(FormView):
@@ -75,7 +75,7 @@ class PasswordResetConfirmView(FormView):
         user_id = token_service.validate_token(token, "reset-password")
         if not user_id:
             messages.error(request, _("El enlace de restablecimiento de contraseña no es válido o ha expirado"))
-            return redirect("authentication:login")
+            return redirect("login")
 
         self.user = User.objects.get(pk=user_id)
         return super().dispatch(request, *args, **kwargs)
@@ -88,4 +88,4 @@ class PasswordResetConfirmView(FormView):
         token_service = TokenService(salt="reset-password")
         token_service.invalidate_token(self.kwargs["token"])
         messages.success(self.request, _("Se ha restablecido tu contraseña correctamente"))
-        return redirect("authentication:login")
+        return redirect("login")

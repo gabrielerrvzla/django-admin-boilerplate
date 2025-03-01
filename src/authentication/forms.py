@@ -32,7 +32,7 @@ class LoginForm(forms.Form):
                 css_class="card",
             ),
             Div(
-                HTML(f'<a href="{reverse_lazy("authentication:password-reset")}">{_("¿Olvidaste tu contraseña?")}</a>'),
+                HTML(f'<a href="{reverse_lazy("password-reset")}">{_("¿Olvidaste tu contraseña?")}</a>'),
                 css_class="text-center mt-3",
             ),
         )
@@ -58,7 +58,7 @@ class PasswordResetForm(forms.Form):
                 css_class="card",
             ),
             Div(
-                HTML(f'<a href="{reverse_lazy("authentication:login")}">{_("Iniciar sesión")}</a>'),
+                HTML(f'<a href="{reverse_lazy("login")}">{_("Iniciar sesión")}</a>'),
                 css_class="text-center mt-3",
             ),
         )

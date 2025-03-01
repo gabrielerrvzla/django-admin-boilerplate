@@ -1,5 +1,5 @@
 {% extends 'extends/base.html' %}
-{% load i18n static %}
+{% load i18n static filters %}
 
 {% block body %}
 <div class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -18,7 +18,7 @@
 
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
             <div class="sidebar-brand">
-                <a href="./index.html" class="brand-link">
+                <a href="{% url 'home' %}" class="brand-link">
                     <img src="{% static 'images/business-logo.png' %}" alt="AdminLTE Logo"
                         class="brand-image opacity-75 shadow" />
                     <span class="brand-text fw-light">{{ site_name }}</span>
@@ -29,7 +29,34 @@
                 <nav class="mt-2">
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu"
                         data-accordion="false">
-
+                        {% for item in menu %}
+                        <li
+                            class="nav-item {% if item|has_active_child:request.resolver_match.url_name %} menu-open {% endif %}">
+                            <a href="{% if item.url != '#' %}{% url item.url %}{% else %}#{% endif %}"
+                                class="nav-link {% if request.resolver_match.url_name == item.url or request.resolver_match.url_name in item.active_children or item|has_active_child:request.resolver_match.url_name  %}active{% endif %}">
+                                <i class="nav-icon {{ item.icon }}"></i>
+                                <p>
+                                    {{ item.name }}
+                                    {% if item.children %}
+                                    <i class="right fas fa-angle-left"></i>
+                                    {% endif %}
+                                </p>
+                            </a>
+                            {% if item.children %}
+                            <ul class="nav nav-treeview">
+                                {% for child in item.children %}
+                                <li class="nav-item">
+                                    <a href="{% if child.url != '#' %}{% url child.url %}{% else %}#{% endif %}"
+                                        class="nav-link {% if request.resolver_match.url_name == child.url or request.resolver_match.url_name in child.active_children %}active{% endif %}">
+                                        <i class="{{ child.icon }} nav-icon"></i>
+                                        <p>{{ child.name }}</p>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
                     </ul>
                 </nav>
             </div>

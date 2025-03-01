@@ -4,8 +4,18 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 
 
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = "base/home.html"
+    extra_context = {
+        "title": _("Inicio"),
+        "breadcrumbs": [
+            {"label": _("Inicio"), "url": ""},
+        ],
+    }
+
+
 class ConfigurationView(LoginRequiredMixin, TemplateView):
-    template_name = "configuration/menu.html"
+    template_name = "base/configuration.html"
     extra_context = {
         "title": _("Configuración"),
         "breadcrumbs": [
@@ -26,7 +36,7 @@ class ConfigurationView(LoginRequiredMixin, TemplateView):
                 },
                 {
                     "label": _("Cerrar sesión"),
-                    "url": reverse_lazy("authentication:logout"),
+                    "url": reverse_lazy("logout"),
                 },
             ],
         },
