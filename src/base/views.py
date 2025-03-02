@@ -28,11 +28,11 @@ class ConfigurationView(LoginRequiredMixin, TemplateView):
             "children": [
                 {
                     "label": _("Perfil"),
-                    "url": "#",
+                    "url": reverse_lazy("profile"),
                 },
                 {
                     "label": _("Cambiar contraseña"),
-                    "url": "#",
+                    "url": reverse_lazy("change-password"),
                 },
                 {
                     "label": _("Cerrar sesión"),

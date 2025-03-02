@@ -53,7 +53,10 @@ def sidebar_context(request):
             "url": "configuration",
             "icon": "bi bi-gear",
             "permissions": [],
-            "active_children": [],
+            "active_children": [
+                "profile",
+                "change-password",
+            ],
         },
     ]
 
