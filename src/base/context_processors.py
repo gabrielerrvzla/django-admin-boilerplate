@@ -54,8 +54,13 @@ def sidebar_context(request):
             "icon": "bi bi-gear",
             "permissions": [],
             "active_children": [
+                # Profile
                 "profile",
                 "change-password",
+                # User
+                "user-list",
+                "user-create",
+                "user-update",
             ],
         },
     ]

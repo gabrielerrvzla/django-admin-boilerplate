@@ -94,3 +94,66 @@ class ChangePasswordForm(forms.Form):
             self.add_error("confirm_password", _("Las contraseñas no coinciden"))
 
         return cleaned_data
+
+
+class UserCreateForm(forms.ModelForm):
+    password = forms.CharField(
+        label=_("Contraseña"),
+        widget=forms.PasswordInput,
+        validators=[password_validation.validate_password],
+    )
+
+    class Meta:
+        model = User
+        fields = ["full_name", "email", "password"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                Div(
+                    Row(Column("full_name")),
+                    Row(Column("email")),
+                    Row(Column("password")),
+                    css_class="card-body",
+                ),
+                Div(
+                    Submit("submit", _("Crear")),
+                    Link(_("Volver"), reverse_lazy("user-list"), css_class="btn btn-outline-secondary"),
+                    css_class="card-footer",
+                ),
+                css_class="card",
+            )
+        )
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["full_name", "email", "is_active"]
+        widgets = {
+            "is_active": forms.Select(choices=((True, _("Activo")), (False, _("Inactivo")))),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                Div(
+                    Row(Column("full_name")),
+                    Row(Column("email")),
+                    Row(Column("is_active")),
+                    css_class="card-body",
+                ),
+                Div(
+                    Submit("submit", _("Actualizar")),
+                    Link(_("Volver"), reverse_lazy("user-list"), css_class="btn btn-outline-secondary"),
+                    css_class="card-footer",
+                ),
+                css_class="card",
+            )
+        )

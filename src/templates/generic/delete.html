@@ -1,0 +1,22 @@
+{% extends 'extends/base-dashboard.html' %}
+{% load i18n %}
+
+{% block content %}
+<form class="card" method="post">
+    {% csrf_token %}
+
+    <div class="card-header">
+        <h5 class="card-title">{% translate 'Eliminar' %}</h5>
+    </div>
+
+    <div class="card-body">
+        <p class="card-text">{% translate '¿Estás seguro de que deseas eliminar este registro?' %}</p>
+        <small class="text-muted">{{ object }}</small>
+    </div>
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-danger">{% translate 'Eliminar' %}</button>
+        <a href="{{ back_url }}" class="btn btn-outline-secondary">{% translate 'Volver' %}</a>
+    </div>
+</form>
+{% endblock %}

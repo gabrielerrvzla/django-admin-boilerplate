@@ -1,0 +1,53 @@
+{% load i18n filters tags %}
+
+<div class="table-responsive">
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        {% for column in columns %}
+        <th>{{ column.name }}</th>
+        {% endfor %}
+
+        {% if columns_actions %}
+        <th style="width: 10%;">{% translate 'Acciones' %}</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in objects %}
+      <tr>
+
+        {% for column in columns %}
+        <td>
+          {{ object|get_attr:column.field }}
+        </td>
+        {% endfor %}
+
+        {% if columns_actions %}
+        <td>
+          <div class="btn-group">
+            {% for action in object.actions %}
+            {% if action.method == 'POST' %}
+            <button class="btn btn-sm btn-outline-{{ action.style }}" onclick="sendPostRequest('{{ action.url }}')"
+              type="button" data-bs-toggle="tooltip" data-bs-title="{{ action.tooltip }}">
+              <i class="{{ action.icon }}"></i>
+            </button>
+            {% else %}
+            <a href="{{ action.url }}" class="btn btn-sm btn-outline-{{ action.style }}" data-bs-toggle="tooltip"
+              data-bs-title="{{ action.tooltip }}">
+              <i class="{{ action.icon }}"></i>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </td>
+        {% endif %}
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="10" class="text-center">{% translate 'No hay datos disponibles' %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

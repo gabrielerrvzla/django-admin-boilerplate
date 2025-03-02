@@ -1,0 +1,57 @@
+{% extends 'extends/base-dashboard.html' %}
+{% load filters i18n crispy_forms_tags %}
+
+
+{% block content %}
+<div class="row justify-content-between">
+    {% if filterset %}
+    <form class="col-12 col-lg-2 order-lg-2 order-1 mb-3">
+        <card class="card">
+            <div class="card-body" style="max-height: 500px; overflow-y: auto;">
+                {{ filterset.form|crispy }}
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-sm w-100">
+                    {% trans 'Filtrar' %}
+                </button>
+
+                <a href="{{ request.path  }}" class="btn btn-outline-secondary btn-sm w-100 mt-1">
+                    {% trans 'Limpiar' %}
+                </a>
+            </div>
+        </card>
+    </form>
+    {% endif %}
+
+    <div class="col-12 {% if filterset %}col-lg-10 order-lg-1 order-2{% endif %}">
+        <div class="card">
+            <div class="card-body">
+                {% include "partials/table.html" %}
+            </div>
+            <div class="card-footer">
+                {% include 'partials/pagination.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if actions %}
+<div class="dropdown position-fixed" style="bottom: 20px; right: 20px;">
+    <button class="btn btn-primary btn-lg rounded-circle dropdown-toggle dropdown-icon" type="button"
+        data-bs-toggle="dropdown" aria-expanded="false" style="width: 60px; height: 60px;">
+    </button>
+    <div class="dropdown-menu dropdown-menu-right" role="menu">
+        {% for action in actions %}
+        {% if action.method == 'POST' %}
+        <button type="button" class="dropdown-item" onclick="sendPostRequest('{{ action.url }}')">
+            {{ action.label }}
+        </button>
+        {% else %}
+        <a class="dropdown-item" href="{{ action.url }}">{{ action.label }}</a>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}
