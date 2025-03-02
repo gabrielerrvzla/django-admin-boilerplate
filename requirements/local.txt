@@ -1,1 +1,3 @@
 -r base.txt
+
+Faker==36.1.1
