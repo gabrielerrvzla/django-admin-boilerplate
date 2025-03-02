@@ -11,3 +11,9 @@ EMAIL_HOST_USER = env("EMAIL_HOST_USER")  # noqa
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")  # noqa
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")  # noqa
 EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")  # noqa
+
+# STATIC
+STATIC_ROOT = BASE_DIR / "staticfiles"  # noqa
+
+# MEDIA
+MEDIA_ROOT = BASE_DIR / "media"  # noqa

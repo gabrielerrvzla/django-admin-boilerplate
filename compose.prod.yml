@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: compose/production/web/Dockerfile
+    command: gunicorn --bind 0.0.0.0:8000 core.wsgi:application
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+    restart: always
+
+  worker:
+    build:
+      context: .
+      dockerfile: compose/production/web/Dockerfile
+    command: celery -A core worker --loglevel=INFO
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+    restart: always
+
+  db:
+    image: postgres:15.0
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    restart: always
+
+  redis:
+    image: redis:latest
+    restart: always
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    restart: always
+
+volumes:
+  static_volume:
+  media_volume:
+  postgres_volume:

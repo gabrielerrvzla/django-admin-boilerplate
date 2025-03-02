@@ -1,4 +1,3 @@
-import faker
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -12,6 +11,8 @@ class Command(BaseCommand):
         if not settings.DEBUG:
             self.stdout.write("This command can only be run in DEBUG mode")
             return
+
+        import faker
 
         self.fake = faker.Faker()
         self.populate_users()
