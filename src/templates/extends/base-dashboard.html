@@ -38,7 +38,7 @@
                                 <p>
                                     {{ item.name }}
                                     {% if item.children %}
-                                    <i class="right fas fa-angle-left"></i>
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
                                     {% endif %}
                                 </p>
                             </a>
@@ -48,7 +48,7 @@
                                 <li class="nav-item">
                                     <a href="{% if child.url != '#' %}{% url child.url %}{% else %}#{% endif %}"
                                         class="nav-link {% if request.resolver_match.url_name == child.url or request.resolver_match.url_name in child.active_children %}active{% endif %}">
-                                        <i class="{{ child.icon }} nav-icon"></i>
+                                        <i class="nav-icon bi bi-circle"></i>
                                         <p>{{ child.name }}</p>
                                     </a>
                                 </li>

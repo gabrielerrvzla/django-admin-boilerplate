@@ -44,20 +44,16 @@ def sidebar_context(request):
         {
             "name": _("Inicio"),
             "url": "home",
-            "icon": "fa fa-home",
+            "icon": "bi bi-speedometer",
             "permissions": [],
-            "active_children": [
-                "home",
-            ],
+            "active_children": [],
         },
         {
             "name": _("Configuración"),
             "url": "configuration",
-            "icon": "fa fa-cogs",
+            "icon": "bi bi-gear",
             "permissions": [],
-            "active_children": [
-                "configuration",
-            ],
+            "active_children": [],
         },
     ]
 
