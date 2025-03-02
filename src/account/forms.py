@@ -132,7 +132,7 @@ class UserCreateForm(forms.ModelForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["full_name", "email", "is_active"]
+        fields = ["full_name", "email", "is_active", "groups"]
         widgets = {
             "is_active": forms.Select(choices=((True, _("Activo")), (False, _("Inactivo")))),
         }
@@ -147,6 +147,7 @@ class UserUpdateForm(forms.ModelForm):
                     Row(Column("full_name")),
                     Row(Column("email")),
                     Row(Column("is_active")),
+                    Row(Column("groups")),
                     css_class="card-body",
                 ),
                 Div(

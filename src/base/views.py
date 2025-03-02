@@ -46,7 +46,7 @@ class ConfigurationView(LoginRequiredMixin, TemplateView):
                 {
                     "label": _("Usuarios"),
                     "url": reverse_lazy("user-list"),
-                    "permission": "user.view_user",
+                    "permission": "account.view_user",
                 },
             ],
         },
