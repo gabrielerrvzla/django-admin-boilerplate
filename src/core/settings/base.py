@@ -31,6 +31,7 @@ LOCAL_APPS = [
     "base",
 ]
 THIRD_PARTY_APPS = [
+    "import_export",
     "crispy_forms",
     "crispy_bootstrap5",
 ]

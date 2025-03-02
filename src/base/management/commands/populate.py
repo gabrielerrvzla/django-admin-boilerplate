@@ -19,7 +19,14 @@ class Command(BaseCommand):
     def populate_users(self):
         users = []
         for _ in range(100):
-            users.append(User(full_name=self.fake.name(), email=self.fake.email(), password=self.fake.password()))
+            users.append(
+                User(
+                    full_name=self.fake.name(),
+                    email=self.fake.email(),
+                    password=self.fake.password(),
+                    is_active=self.fake.boolean(),
+                )
+            )
 
         User.objects.filter(is_superuser=False).delete()
         User.objects.bulk_create(users)

@@ -1,11 +1,19 @@
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
-from core.generic.views import GenericCreateView, GenericDeleteView, GenericFormView, GenericListView, GenericUpdateView
+from core.generic.views import (
+    GenericCreateView,
+    GenericDeleteView,
+    GenericExportView,
+    GenericFormView,
+    GenericListView,
+    GenericUpdateView,
+)
 
 from .filtersets import UserFilterset
 from .forms import ChangePasswordForm, ProfileForm, UserCreateForm, UserUpdateForm
 from .models import User
+from .resources import UserResource
 
 
 class ProfileView(GenericUpdateView):
@@ -77,7 +85,7 @@ class UserListView(GenericListView):
             "method": "GET",
         },
         {
-            "url": "#",
+            "url": reverse_lazy("user-export"),
             "permission": "account.view_user",
             "label": _("Exportar"),
             "method": "POST",
@@ -179,3 +187,15 @@ class UserDeleteView(GenericDeleteView):
 
     def get_queryset(self):
         return super().get_queryset().filter(is_superuser=False).exclude(pk=self.request.user.pk)
+
+
+class UserExportView(GenericExportView):
+    format = "xlsx"
+    filterset = UserFilterset
+    permission_required = "account.view_user"
+    resource_class = UserResource
+
+    def get_queryset(self):
+        return (
+            super().get_queryset().filter(is_superuser=False).exclude(pk=self.request.user.pk).order_by("-created_at")
+        )
